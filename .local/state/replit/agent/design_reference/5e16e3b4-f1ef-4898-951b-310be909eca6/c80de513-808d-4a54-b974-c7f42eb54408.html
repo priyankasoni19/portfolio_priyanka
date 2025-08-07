@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Priyanka Soni</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #1F1F1F;
+            --accent: #40E0D0;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --particle-color: #40E0D0;
+        }
+
+        [data-theme="cyberpunk"] {
+            --bg-primary: #0D1117;
+            --bg-secondary: #21262D;
+            --accent: #00D4FF;
+            --text-primary: #F0F6FC;
+            --text-secondary: #7D8590;
+            --particle-color: #00D4FF;
+        }
+
+        [data-theme="sunset"] {
+            --bg-primary: #1A0E0A;
+            --bg-secondary: #8B2500;
+            --accent: #87CEEB;
+            --text-primary: #FFF8DC;
+            --text-secondary: #DDD;
+            --particle-color: #87CEEB;
+        }
+
+        [data-theme="ocean"] {
+            --bg-primary: #0F1419;
+            --bg-secondary: #1E3A8A;
+            --accent: #5DADE2;
+            --text-primary: #E8F4F8;
+            --text-secondary: #B8D4E3;
+            --particle-color: #5DADE2;
+        }
+
+        * {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            background: var(--particle-color);
+            opacity: 0.1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.1; }
+            33% { transform: translateY(-20px) translateX(10px); opacity: 0.3; }
+            66% { transform: translateY(-10px) translateX(-10px); opacity: 0.2; }
+        }
+
+        .skill-bar {
+            background: var(--bg-secondary);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+        }
+
+        .theme-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-btn.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .theme-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .theme-btn.active::before {
+            opacity: 1;
+        }
+
+        .theme-professional { background: linear-gradient(45deg, #000000, #1F1F1F); }
+        .theme-cyberpunk { background: linear-gradient(45deg, #0D1117, #21262D); }
+        .theme-sunset { background: linear-gradient(45deg, #1A0E0A, #8B2500); }
+        .theme-ocean { background: linear-gradient(45deg, #0F1419, #1E3A8A); }
+
+        .animated-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glow {
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .contact-input {
+            background: var(--bg-secondary);
+            border: 1px solid var(--text-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+    </style>
+</head>
+<body data-theme="professional">
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md" style="background: rgba(0,0,0,0.8);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold" style="color: var(--accent);">JohnDev</div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#resume" class="nav-link">Resume</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="theme-btn theme-professional active" data-theme="professional" title="Dark Professional"></div>
+                    <div class="theme-btn theme-cyberpunk" data-theme="cyberpunk" title="Cyberpunk"></div>
+                    <div class="theme-btn theme-sunset" data-theme="sunset" title="Sunset"></div>
+                    <div class="theme-btn theme-ocean" data-theme="ocean" title="Ocean Deep"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20">
+        <div class="text-center max-w-4xl mx-auto px-4">
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 animated-text" style="color: var(--accent);">
+                Priyanka Soni
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 animated-text" style="color: var(--text-secondary); animation-delay: 0.2s;">
+                Full Stack Developer & UI/UX Designer
+            </p>
+            <div class="animated-text" style="animation-delay: 0.4s;">
+                <button class="px-8 py-3 rounded-full border-2 hover:glow transition-all duration-300" 
+                        style="border-color: var(--accent); color: var(--accent);">
+                    View My Work
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4" style="background: var(--bg-secondary);">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12" style="color: var(--accent);">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-lg mb-6" style="color: var(--text-secondary);">
+                        I'm a passionate full-stack developer with 5+ years of experience creating digital experiences 
+                        that combine beautiful design with robust functionality. I specialize in modern web technologies 
+                        and love turning complex problems into simple, elegant solutions.
+                    </p>
+                    <p class="text-lg" style="color: var(--text-secondary);">
+                        When I'm not coding, you'll find me exploring new technologies, contributing to open source projects, 
+                        or sharing knowledge with the developer community through blog posts and mentoring.
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <span style="color: var(--text-primary);">Problem Solving</span>
+                        <span style="color: var(--accent);">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%;"></div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <span style="color: var(--text-primary);">Team Collaboration</span>
+                        <span style="color: var(--accent);">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%;"></div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <span style="color: var(--text-primary);">Learning Agility</span>
+                        <span style="color: var(--accent);">98%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 98%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12" style="color: var(--accent);">Technical Skills</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 rounded-lg" style="background: var(--bg-secondary);">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Frontend</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span>React/Next.js</span>
+                            <span style="color: var(--accent);">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%;"></div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <span>TypeScript</span>
+                            <span style="color: var(--accent);">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <span>CSS/Tailwind</span>
+                            <span style="color: var(--accent);">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center p-6 rounded-lg" style="background: var(--bg-secondary);">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Backend</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span>Node.js</span>
+                            <span style="color: var(--accent);">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%;"></div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <span>Python</span>
+                            <span style="color: var(--accent);">82%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 82%;"></div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <span>PostgreSQL</span>
+                            <span style="color: var(--accent);">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center p-6 rounded-lg" style="background: var(--bg-secondary);">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Tools</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span>Git/GitHub</span>
+                            <span style="color: var(--accent);">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%;"></div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <span>Docker</span>
+                            <span style="color: var(--accent);">78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 78%;"></div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <span>AWS</span>
+                            <span style="color: var(--accent);">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4" style="background: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12" style="color: var(--accent);">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card rounded-xl overflow-hidden">
+                    <!-- E-commerce dashboard interface with clean design and data visualizations -->
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="E-commerce Dashboard" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">E-commerce Dashboard</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            A comprehensive analytics dashboard for e-commerce businesses with real-time data visualization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">React</span>
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">Node.js</span>
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">MongoDB</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="text-sm hover:underline" style="color: var(--accent);">
+                                <i class="fab fa-github mr-1"></i>Code
+                            </button>
+                            <button class="text-sm hover:underline" style="color: var(--accent);">
+                                <i class="fas fa-external-link-alt mr-1"></i>Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card rounded-xl overflow-hidden">
+                    <!-- Mobile fitness app interface showing workout tracking features -->
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="Fitness Tracking App" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Fitness Tracker</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            Mobile-first fitness application with workout tracking and progress analytics.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">React Native</span>
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">Firebase</span>
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">Redux</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="text-sm hover:underline" style="color: var(--accent);">
+                                <i class="fab fa-github mr-1"></i>Code
+                            </button>
+                            <button class="text-sm hover:underline" style="color: var(--accent);">
+                                <i class="fas fa-external-link-alt mr-1"></i>Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card rounded-xl overflow-hidden">
+                    <!-- AI chatbot interface with modern messaging design -->
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="AI Chatbot Interface" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">AI Chatbot</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            Intelligent chatbot with natural language processing and contextual responses.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">Python</span>
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">TensorFlow</span>
+                            <span class="px-2 py-1 text-xs rounded" style="background: var(--accent); color: var(--bg-primary);">Flask</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="text-sm hover:underline" style="color: var(--accent);">
+                                <i class="fab fa-github mr-1"></i>Code
+                            </button>
+                            <button class="text-sm hover:underline" style="color: var(--accent);">
+                                <i class="fas fa-external-link-alt mr-1"></i>Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12" style="color: var(--accent);">Resume</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6" style="color: var(--accent);">Experience</h3>
+                    <div class="space-y-6">
+                        <div class="border-l-2 pl-6" style="border-color: var(--accent);">
+                            <h4 class="font-semibold">Senior Full Stack Developer</h4>
+                            <p style="color: var(--accent);">TechCorp Inc. • 2022 - Present</p>
+                            <p style="color: var(--text-secondary);" class="mt-2">
+                                Led development of scalable web applications serving 100k+ users. 
+                                Mentored junior developers and implemented CI/CD practices.
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-2 pl-6" style="border-color: var(--accent);">
+                            <h4 class="font-semibold">Full Stack Developer</h4>
+                            <p style="color: var(--accent);">StartupXYZ • 2020 - 2022</p>
+                            <p style="color: var(--text-secondary);" class="mt-2">
+                                Built MVP products from conception to launch. Collaborated with 
+                                design team to create pixel-perfect user interfaces.
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-2 pl-6" style="border-color: var(--accent);">
+                            <h4 class="font-semibold">Frontend Developer</h4>
+                            <p style="color: var(--accent);">WebAgency • 2019 - 2020</p>
+                            <p style="color: var(--text-secondary);" class="mt-2">
+                                Developed responsive websites for various clients. 
+                                Optimized performance and implemented SEO best practices.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6" style="color: var(--accent);">Education</h3>
+                    <div class="space-y-6">
+                        <div class="border-l-2 pl-6" style="border-color: var(--accent);">
+                            <h4 class="font-semibold">B.S. Computer Science</h4>
+                            <p style="color: var(--accent);">University of Technology • 2019</p>
+                            <p style="color: var(--text-secondary);" class="mt-2">
+                                Graduated Magna Cum Laude. Specialized in web development 
+                                and software engineering principles.
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-2 pl-6" style="border-color: var(--accent);">
+                            <h4 class="font-semibold">Certifications</h4>
+                            <ul style="color: var(--text-secondary);" class="mt-2 space-y-1">
+                                <li>• AWS Certified Developer Associate</li>
+                                <li>• Google Cloud Professional Developer</li>
+                                <li>• MongoDB Certified Developer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="px-8 py-3 rounded-full border-2 hover:glow transition-all duration-300 inline-flex items-center" 
+                        style="border-color: var(--accent); color: var(--accent);" 
+                        onclick="downloadResume()">
+                    <i class="fas fa-download mr-2"></i>
+                    Download Resume PDF
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4" style="background: var(--bg-secondary);">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12" style="color: var(--accent);">Get In Touch</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Let's work together!</h3>
+                    <p style="color: var(--text-secondary);" class="mb-8">
+                        I'm always interested in hearing about new projects and opportunities. 
+                        Whether you're a company looking to hire, or you're just looking to chat 
+                        about tech, feel free to reach out.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: var(--accent); color: var(--bg-primary);">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Email</p>
+                                <p style="color: var(--text-secondary);">john@developer.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: var(--accent); color: var(--bg-primary);">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Phone</p>
+                                <p style="color: var(--text-secondary);">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: var(--accent); color: var(--bg-primary);">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Location</p>
+                                <p style="color: var(--text-secondary);">San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="space-y-6" onsubmit="handleContactSubmit(event)">
+                    <div>
+                        <input type="text" placeholder="Your Name" required
+                               class="w-full px-4 py-3 rounded-lg contact-input focus:outline-none">
+                    </div>
+                    <div>
+                        <input type="email" placeholder="Your Email" required
+                               class="w-full px-4 py-3 rounded-lg contact-input focus:outline-none">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Subject" required
+                               class="w-full px-4 py-3 rounded-lg contact-input focus:outline-none">
+                    </div>
+                    <div>
+                        <textarea placeholder="Your Message" rows="5" required
+                                  class="w-full px-4 py-3 rounded-lg contact-input focus:outline-none resize-none"></textarea>
+                    </div>
+                    <button type="submit" 
+                            class="w-full py-3 rounded-lg font-semibold transition-all duration-300 hover:glow"
+                            style="background: var(--accent); color: var(--bg-primary);">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-2xl font-bold mb-4 md:mb-0" style="color: var(--accent);">JohnDev</div>
+                
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:glow" 
+                       style="background: var(--bg-secondary); color: var(--accent);">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:glow" 
+                       style="background: var(--bg-secondary); color: var(--accent);">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:glow" 
+                       style="background: var(--bg-secondary); color: var(--accent);">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:glow" 
+                       style="background: var(--bg-secondary); color: var(--accent);">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </div>
+                
+                <p style="color: var(--text-secondary);" class="text-sm text-center md:text-right">
+                    © 2024 Priyanka Soni. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Theme switching functionality
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const body = document.body;
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'professional';
+            body.setAttribute('data-theme', savedTheme);
+            updateActiveTheme(savedTheme);
+            
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const theme = btn.getAttribute('data-theme');
+                    body.setAttribute('data-theme', theme);
+                    localStorage.setItem('portfolio-theme', theme);
+                    updateActiveTheme(theme);
+                });
+            });
+            
+            function updateActiveTheme(activeTheme) {
+                themeButtons.forEach(btn => {
+                    if (btn.getAttribute('data-theme') === activeTheme) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Particle system
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = Math.random() * window.innerHeight + 'px';
+                
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                
+                document.getElementById('particles').appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 8000);
+            }
+            
+            // Create particles continuously
+            setInterval(createParticle, 300);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Skill bar animations on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const skillBars = entry.target.querySelectorAll('.skill-progress');
+                        skillBars.forEach(bar => {
+                            // Trigger animation by setting width
+                            const width = bar.style.width;
+                            bar.style.width = '0%';
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 100);
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe skills section
+            const skillsSection = document.getElementById('skills');
+            if (skillsSection) {
+                observer.observe(skillsSection);
+            }
+        })();
+        
+        // Contact form submission
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            // TODO: Implement actual form submission logic
+            alert('Thank you for your message! I\'ll get back to you soon.');
+        }
+        
+        // Resume download
+        function downloadResume() {
+            // TODO: Implement actual resume download
+            alert('Resume download would be implemented here!');
+        }
+    </script>
+</body>
+</html>

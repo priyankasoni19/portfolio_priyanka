@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Your Name</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'particle': 'particle 20s linear infinite',
+                        'glitch': 'glitch 2s infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)' },
+                            '100%': { boxShadow: '0 0 30px rgba(255, 215, 0, 0.8)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        particle: {
+                            '0%': { transform: 'translateY(100vh) translateX(0)' },
+                            '100%': { transform: 'translateY(-100px) translateX(100px)' },
+                        },
+                        glitch: {
+                            '0%': { transform: 'translateX(0)' },
+                            '20%': { transform: 'translateX(-2px)' },
+                            '40%': { transform: 'translateX(2px)' },
+                            '60%': { transform: 'translateX(-2px)' },
+                            '80%': { transform: 'translateX(2px)' },
+                            '100%': { transform: 'translateX(0)' },
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme Variables */
+        :root {
+            --theme-bg: #0A0A0F;
+            --theme-surface: #1A1A2E;
+            --theme-accent: #FFD700;
+            --theme-text: #E5E5E5;
+            --theme-muted: #999999;
+        }
+
+        [data-theme="cyberpunk"] {
+            --theme-bg: #0D0208;
+            --theme-surface: #7209B7;
+            --theme-accent: #00F5FF;
+            --theme-text: #39FF14;
+            --theme-muted: #9D4EDD;
+        }
+
+        [data-theme="sunset"] {
+            --theme-bg: #1A0B00;
+            --theme-surface: #FF6B35;
+            --theme-accent: #F7931E;
+            --theme-text: #FFE66D;
+            --theme-muted: #FF9F1C;
+        }
+
+        [data-theme="ocean"] {
+            --theme-bg: #001F3F;
+            --theme-surface: #003366;
+            --theme-accent: #00BFFF;
+            --theme-text: #20B2AA;
+            --theme-muted: #4682B4;
+        }
+
+        body {
+            background-color: var(--theme-bg);
+            color: var(--theme-text);
+            transition: all 0.5s ease;
+        }
+
+        .theme-surface {
+            background-color: var(--theme-surface);
+        }
+
+        .theme-accent {
+            color: var(--theme-accent);
+        }
+
+        .theme-accent-bg {
+            background-color: var(--theme-accent);
+        }
+
+        .theme-text {
+            color: var(--theme-text);
+        }
+
+        .theme-muted {
+            color: var(--theme-muted);
+        }
+
+        /* Animated Background Particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--theme-accent);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: particle 20s linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: -5s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: -2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: -8s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: -1s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: -6s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: -3s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: -9s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: -4s; }
+
+        /* Skill Progress Animation */
+        .skill-bar {
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+
+        .skill-bar.animate {
+            width: var(--skill-width);
+        }
+
+        /* Glitch Effect for Cyberpunk Theme */
+        [data-theme="cyberpunk"] .glitch-text {
+            animation: glitch 2s infinite;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--theme-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--theme-accent);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-inter overflow-x-hidden" data-theme="professional">
+    <!-- Animated Background Particles -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- @COMPONENT: Navigation [fixed navigation with theme switcher] -->
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-2xl font-bold theme-accent glitch-text">
+                        Portfolio
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link theme-text hover:theme-accent transition-colors duration-300">Home</a>
+                        <a href="#about" class="nav-link theme-text hover:theme-accent transition-colors duration-300">About</a>
+                        <a href="#skills" class="nav-link theme-text hover:theme-accent transition-colors duration-300">Skills</a>
+                        <a href="#projects" class="nav-link theme-text hover:theme-accent transition-colors duration-300">Projects</a>
+                        <a href="#contact" class="nav-link theme-text hover:theme-accent transition-colors duration-300">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Theme Switcher -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="theme-switcher" class="theme-surface p-2 rounded-lg theme-accent-bg transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-palette"></i>
+                        </button>
+                        <div id="theme-menu" class="absolute right-0 mt-2 w-48 theme-surface rounded-lg shadow-xl opacity-0 invisible transform translate-y-2 transition-all duration-300">
+                            <div class="p-2">
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-opacity-20 hover:bg-white transition-colors" data-theme="professional">
+                                    <span class="inline-block w-3 h-3 bg-yellow-400 rounded-full mr-2"></span>
+                                    Dark Professional
+                                </button>
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-opacity-20 hover:bg-white transition-colors" data-theme="cyberpunk">
+                                    <span class="inline-block w-3 h-3 bg-cyan-400 rounded-full mr-2"></span>
+                                    Cyberpunk
+                                </button>
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-opacity-20 hover:bg-white transition-colors" data-theme="sunset">
+                                    <span class="inline-block w-3 h-3 bg-orange-400 rounded-full mr-2"></span>
+                                    Sunset
+                                </button>
+                                <button class="theme-option w-full text-left px-3 py-2 rounded hover:bg-opacity-20 hover:bg-white transition-colors" data-theme="ocean">
+                                    <span class="inline-block w-3 h-3 bg-blue-400 rounded-full mr-2"></span>
+                                    Ocean Deep
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden theme-accent">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden theme-surface transform -translate-y-full opacity-0 transition-all duration-300">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="mobile-nav-link block px-3 py-2 theme-text hover:theme-accent transition-colors">Home</a>
+                <a href="#about" class="mobile-nav-link block px-3 py-2 theme-text hover:theme-accent transition-colors">About</a>
+                <a href="#skills" class="mobile-nav-link block px-3 py-2 theme-text hover:theme-accent transition-colors">Skills</a>
+                <a href="#projects" class="mobile-nav-link block px-3 py-2 theme-text hover:theme-accent transition-colors">Projects</a>
+                <a href="#contact" class="mobile-nav-link block px-3 py-2 theme-text hover:theme-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- @COMPONENT: Hero Section [animated typography hero] -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 relative z-10">
+        <div class="text-center max-w-4xl mx-auto">
+            <div class="animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-slide-up glitch-text">
+                    <span class="theme-text">Hello, I'm</span>
+                    <span class="theme-accent block mt-2">Your Name</span>
+                </h1>
+                <p class="text-xl md:text-2xl theme-muted mb-8 animate-slide-up" style="animation-delay: 0.2s">
+                    Full Stack Developer & UI/UX Designer
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.4s">
+                    <a href="#projects" class="theme-accent-bg px-8 py-3 rounded-lg font-semibold text-black hover:scale-105 transition-transform duration-300 animate-glow">
+                        View My Work
+                    </a>
+                    <a href="#contact" class="border-2 border-current px-8 py-3 rounded-lg font-semibold theme-accent hover:theme-accent-bg hover:text-black transition-all duration-300">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down theme-accent text-2xl"></i>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Hero Section -->
+
+    <!-- @COMPONENT: About Section [animated text reveals] -->
+    <section id="about" class="py-20 px-4 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold theme-accent mb-4 animate-slide-up">
+                    About Me
+                </h2>
+                <p class="theme-muted text-lg animate-slide-up" style="animation-delay: 0.1s">
+                    Passionate about creating amazing digital experiences
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-up">
+                    <h3 class="text-2xl font-bold theme-text mb-6">
+                        Crafting Digital Excellence
+                    </h3>
+                    <p class="theme-muted mb-6 leading-relaxed">
+                        With over 5 years of experience in web development and design, I specialize in creating 
+                        beautiful, functional, and user-centered digital experiences. My expertise spans from 
+                        front-end technologies to full-stack development.
+                    </p>
+                    <p class="theme-muted mb-8 leading-relaxed">
+                        I'm passionate about clean code, innovative solutions, and staying up-to-date with the 
+                        latest technologies. When I'm not coding, you'll find me exploring new design trends 
+                        or contributing to open-source projects.
+                    </p>
+                    <a href="/resume.pdf" download class="inline-flex items-center theme-accent-bg px-6 py-3 rounded-lg font-semibold text-black hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Resume
+                    </a>
+                </div>
+
+                <div class="animate-slide-up" style="animation-delay: 0.2s">
+                    <div class="theme-surface p-8 rounded-xl">
+                        <h4 class="text-xl font-bold theme-text mb-6">Quick Facts</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between">
+                                <span class="theme-muted">Experience</span>
+                                <span class="theme-accent font-semibold">5+ Years</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="theme-muted">Projects Completed</span>
+                                <span class="theme-accent font-semibold">50+</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="theme-muted">Happy Clients</span>
+                                <span class="theme-accent font-semibold">30+</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="theme-muted">Location</span>
+                                <span class="theme-accent font-semibold">Your City</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: About Section -->
+
+    <!-- @COMPONENT: Skills Section [animated progress indicators] -->
+    <section id="skills" class="py-20 px-4 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold theme-accent mb-4 animate-slide-up">
+                    Skills & Expertise
+                </h2>
+                <p class="theme-muted text-lg animate-slide-up" style="animation-delay: 0.1s">
+                    Technologies and tools I work with
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Technical Skills -->
+                <div class="animate-slide-up">
+                    <h3 class="text-2xl font-bold theme-text mb-8">Technical Skills</h3>
+                    <div class="space-y-6">
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2">
+                                <span class="theme-text font-medium">JavaScript/TypeScript</span>
+                                <span class="theme-accent">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="skill-bar bg-gradient-to-r from-current to-transparent h-3 rounded-full theme-accent" style="--skill-width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2">
+                                <span class="theme-text font-medium">React/Next.js</span>
+                                <span class="theme-accent">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="skill-bar bg-gradient-to-r from-current to-transparent h-3 rounded-full theme-accent" style="--skill-width: 90%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2">
+                                <span class="theme-text font-medium">Node.js/Express</span>
+                                <span class="theme-accent">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="skill-bar bg-gradient-to-r from-current to-transparent h-3 rounded-full theme-accent" style="--skill-width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2">
+                                <span class="theme-text font-medium">Python/Django</span>
+                                <span class="theme-accent">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="skill-bar bg-gradient-to-r from-current to-transparent h-3 rounded-full theme-accent" style="--skill-width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Skills -->
+                <div class="animate-slide-up" style="animation-delay: 0.2s">
+                    <h3 class="text-2xl font-bold theme-text mb-8">Design & Tools</h3>
+                    <div class="space-y-6">
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2">
+                                <span class="theme-text font-medium">UI/UX Design</span>
+                                <span class="theme-accent">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="skill-bar bg-gradient-to-r from-current to-transparent h-3 rounded-full theme-accent" style="--skill-width: 90%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2">
+                                <span class="theme-text font-medium">Figma/Adobe XD</span>
+                                <span class="theme-accent">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="skill-bar bg-gradient-to-r from-current to-transparent h-3 rounded-full theme-accent" style="--skill-width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2">
+                                <span class="theme-text font-medium">Git/GitHub</span>
+                                <span class="theme-accent">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="skill-bar bg-gradient-to-r from-current to-transparent h-3 rounded-full theme-accent" style="--skill-width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2">
+                                <span class="theme-text font-medium">AWS/Docker</span>
+                                <span class="theme-accent">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="skill-bar bg-gradient-to-r from-current to-transparent h-3 rounded-full theme-accent" style="--skill-width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Skills Section -->
+
+    <!-- @COMPONENT: Projects Section [animated project cards] -->
+    <section id="projects" class="py-20 px-4 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold theme-accent mb-4 animate-slide-up">
+                    Featured Projects
+                </h2>
+                <p class="theme-muted text-lg animate-slide-up" style="animation-delay: 0.1s">
+                    Some of my recent work and achievements
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- @MAP: projects.map(project => ( -->
+                <div class="project-card theme-surface rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 animate-slide-up">
+                    <div class="h-48 bg-gradient-to-br from-purple-600 to-blue-600 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-code text-4xl theme-text"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold theme-text mb-2">E-Commerce Platform</h3>
+                        <p class="theme-muted mb-4">
+                            A full-stack e-commerce solution built with React, Node.js, and MongoDB.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">React</span>
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">Node.js</span>
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">MongoDB</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#" class="theme-accent hover:underline">
+                                <i class="fas fa-external-link-alt mr-1"></i>
+                                Live Demo
+                            </a>
+                            <a href="#" class="theme-accent hover:underline">
+                                <i class="fab fa-github mr-1"></i>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card theme-surface rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 animate-slide-up" style="animation-delay: 0.1s">
+                    <div class="h-48 bg-gradient-to-br from-green-600 to-teal-600 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-4xl theme-text"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold theme-text mb-2">Task Management App</h3>
+                        <p class="theme-muted mb-4">
+                            A responsive task management application with real-time collaboration features.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">Vue.js</span>
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">Firebase</span>
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">Tailwind</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#" class="theme-accent hover:underline">
+                                <i class="fas fa-external-link-alt mr-1"></i>
+                                Live Demo
+                            </a>
+                            <a href="#" class="theme-accent hover:underline">
+                                <i class="fab fa-github mr-1"></i>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card theme-surface rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 animate-slide-up" style="animation-delay: 0.2s">
+                    <div class="h-48 bg-gradient-to-br from-red-600 to-pink-600 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-4xl theme-text"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold theme-text mb-2">Analytics Dashboard</h3>
+                        <p class="theme-muted mb-4">
+                            A comprehensive analytics dashboard with interactive charts and real-time data.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">Next.js</span>
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">D3.js</span>
+                            <span class="px-3 py-1 text-xs theme-surface rounded-full theme-accent">PostgreSQL</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#" class="theme-accent hover:underline">
+                                <i class="fas fa-external-link-alt mr-1"></i>
+                                Live Demo
+                            </a>
+                            <a href="#" class="theme-accent hover:underline">
+                                <i class="fab fa-github mr-1"></i>
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="theme-accent-bg px-8 py-3 rounded-lg font-semibold text-black hover:scale-105 transition-transform duration-300 animate-glow">
+                    View All Projects
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Projects Section -->
+
+    <!-- @COMPONENT: Contact Section [contact form with validation] -->
+    <section id="contact" class="py-20 px-4 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold theme-accent mb-4 animate-slide-up">
+                    Get In Touch
+                </h2>
+                <p class="theme-muted text-lg animate-slide-up" style="animation-delay: 0.1s">
+                    Let's work together to bring your ideas to life
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="animate-slide-up">
+                    <h3 class="text-2xl font-bold theme-text mb-8">Let's Connect</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="theme-accent-bg p-3 rounded-lg mr-4">
+                                <i class="fas fa-envelope text-black"></i>
+                            </div>
+                            <div>
+                                <p class="theme-text font-medium">Email</p>
+                                <p class="theme-muted">your.email@example.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="theme-accent-bg p-3 rounded-lg mr-4">
+                                <i class="fas fa-phone text-black"></i>
+                            </div>
+                            <div>
+                                <p class="theme-text font-medium">Phone</p>
+                                <p class="theme-muted">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="theme-accent-bg p-3 rounded-lg mr-4">
+                                <i class="fas fa-map-marker-alt text-black"></i>
+                            </div>
+                            <div>
+                                <p class="theme-text font-medium">Location</p>
+                                <p class="theme-muted">Your City, Country</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="mt-8">
+                        <h4 class="text-lg font-bold theme-text mb-4">Follow Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-link theme-surface p-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                                <i class="fab fa-github theme-accent"></i>
+                            </a>
+                            <a href="#" class="social-link theme-surface p-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                                <i class="fab fa-linkedin theme-accent"></i>
+                            </a>
+                            <a href="#" class="social-link theme-surface p-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                                <i class="fab fa-twitter theme-accent"></i>
+                            </a>
+                            <a href="#" class="social-link theme-surface p-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                                <i class="fab fa-dribbble theme-accent"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="animate-slide-up" style="animation-delay: 0.2s">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium theme-text mb-2">Name</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="w-full px-4 py-3 theme-surface rounded-lg theme-text border-2 border-transparent focus:border-current focus:outline-none transition-colors duration-300">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium theme-text mb-2">Email</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="w-full px-4 py-3 theme-surface rounded-lg theme-text border-2 border-transparent focus:border-current focus:outline-none transition-colors duration-300">
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-sm font-medium theme-text mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" required 
+                                   class="w-full px-4 py-3 theme-surface rounded-lg theme-text border-2 border-transparent focus:border-current focus:outline-none transition-colors duration-300">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium theme-text mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      class="w-full px-4 py-3 theme-surface rounded-lg theme-text border-2 border-transparent focus:border-current focus:outline-none transition-colors duration-300 resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" 
+                                class="w-full theme-accent-bg py-3 rounded-lg font-semibold text-black hover:scale-105 transition-transform duration-300 animate-glow">
+                            <span class="button-text">Send Message</span>
+                            <i class="fas fa-spinner fa-spin ml-2 hidden loading-spinner"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Contact Section -->
+
+    <!-- @COMPONENT: Footer [animated social links] -->
+    <footer class="py-12 px-4 relative z-10 border-t border-gray-700">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold theme-accent mb-4">Your Name</h3>
+                    <p class="theme-muted">
+                        Full Stack Developer passionate about creating amazing digital experiences.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold theme-text mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#about" class="block theme-muted hover:theme-accent transition-colors">About</a>
+                        <a href="#skills" class="block theme-muted hover:theme-accent transition-colors">Skills</a>
+                        <a href="#projects" class="block theme-muted hover:theme-accent transition-colors">Projects</a>
+                        <a href="#contact" class="block theme-muted hover:theme-accent transition-colors">Contact</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold theme-text mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="theme-surface p-2 rounded-lg hover:scale-110 transition-transform duration-300">
+                            <i class="fab fa-github theme-accent"></i>
+                        </a>
+                        <a href="#" class="theme-surface p-2 rounded-lg hover:scale-110 transition-transform duration-300">
+                            <i class="fab fa-linkedin theme-accent"></i>
+                        </a>
+                        <a href="#" class="theme-surface p-2 rounded-lg hover:scale-110 transition-transform duration-300">
+                            <i class="fab fa-twitter theme-accent"></i>
+                        </a>
+                        <a href="#" class="theme-surface p-2 rounded-lg hover:scale-110 transition-transform duration-300">
+                            <i class="fab fa-dribbble theme-accent"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="theme-muted">
+                    &copy; 2024 Your Name. All rights reserved. Built with passion and lots of coffee ☕
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // Theme Management
+        (function() {
+            const body = document.body;
+            const themeSwitcher = document.getElementById('theme-switcher');
+            const themeMenu = document.getElementById('theme-menu');
+            const themeOptions = document.querySelectorAll('.theme-option');
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'professional';
+            body.setAttribute('data-theme', savedTheme);
+            
+            // Theme switcher toggle
+            themeSwitcher.addEventListener('click', () => {
+                const isVisible = themeMenu.classList.contains('opacity-0');
+                if (isVisible) {
+                    themeMenu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+                } else {
+                    themeMenu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+                }
+            });
+            
+            // Theme selection
+            themeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const theme = option.getAttribute('data-theme');
+                    body.setAttribute('data-theme', theme);
+                    localStorage.setItem('portfolio-theme', theme);
+                    themeMenu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+                });
+            });
+            
+            // Close theme menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!themeSwitcher.contains(e.target) && !themeMenu.contains(e.target)) {
+                    themeMenu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+                }
+            });
+        })();
+
+        // Mobile Menu Toggle
+        (function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                const isVisible = !mobileMenu.classList.contains('-translate-y-full');
+                if (isVisible) {
+                    mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+                } else {
+                    mobileMenu.classList.remove('-translate-y-full', 'opacity-0');
+                }
+            });
+            
+            // Close mobile menu when clicking nav links
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+                });
+            });
+        })();
+
+        // Navbar Background on Scroll
+        (function() {
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('theme-surface');
+                } else {
+                    navbar.classList.remove('theme-surface');
+                }
+            });
+        })();
+
+        // Animate Skill Bars on Scroll
+        (function() {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => observer.observe(bar));
+        })();
+
+        // Contact Form Handling
+        (function() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const buttonText = submitBtn.querySelector('.button-text');
+            const loadingSpinner = submitBtn.querySelector('.loading-spinner');
+            
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Show loading state
+                buttonText.textContent = 'Sending...';
+                loadingSpinner.classList.remove('hidden');
+                submitBtn.disabled = true;
+                
+                // TODO: Implement actual form submission logic
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Show success state
+                buttonText.textContent = 'Message Sent!';
+                loadingSpinner.classList.add('hidden');
+                
+                // Reset form
+                setTimeout(() => {
+                    form.reset();
+                    buttonText.textContent = 'Send Message';
+                    submitBtn.disabled = false;
+                }, 2000);
+            });
+        })();
+
+        // Smooth Scrolling for Navigation Links
+        (function() {
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        })();
+
+        // Add animation classes on scroll
+        (function() {
+            const animateElements = document.querySelectorAll('.animate-slide-up, .animate-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        })();
+    </script>
+</body>
+</html>

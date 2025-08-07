@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#3B82F6',
+                            600: '#2563EB',
+                            700: '#1D4ED8',
+                            800: '#1E40AF'
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-inter bg-white text-gray-800">
+    
+    <!-- @COMPONENT: Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-gray-900" data-mock="true">John Doe</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Home</a>
+                        <a href="#about" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">About</a>
+                        <a href="#skills" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Skills</a>
+                        <a href="#projects" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Projects</a>
+                        <a href="#resume" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Resume</a>
+                        <a href="#contact" class="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 transition-colors duration-200 font-medium">Contact</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-gray-900 p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="#home" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 py-2 font-medium">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 py-2 font-medium">About</a>
+                    <a href="#skills" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 py-2 font-medium">Skills</a>
+                    <a href="#projects" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 py-2 font-medium">Projects</a>
+                    <a href="#resume" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 py-2 font-medium">Resume</a>
+                    <a href="#contact" class="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 transition-colors duration-200 font-medium inline-block w-fit">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- @COMPONENT: Hero Section -->
+    <section id="home" class="pt-16 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight" data-mock="true">
+                        Hi, I'm <span class="text-primary-600">John Doe</span>
+                    </h1>
+                    <p class="mt-6 text-xl text-gray-600 leading-relaxed" data-mock="true">
+                        Full Stack Developer & Designer crafting beautiful digital experiences with modern technologies.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        <a href="#projects" class="inline-flex items-center justify-center px-8 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                            <i class="fas fa-code mr-2"></i>
+                            View My Work
+                        </a>
+                        <a href="#contact" class="inline-flex items-center justify-center px-8 py-3 border-2 border-primary-600 text-primary-600 font-medium rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200">
+                            <i class="fas fa-envelope mr-2"></i>
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- Professional developer working at computer setup -->
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Professional headshot" class="rounded-2xl shadow-xl w-full h-auto" data-mock-image="true" data-implementation="Replace with actual profile photo" />
+                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-sm font-medium text-gray-700" data-mock="true">Available for work</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Hero Section -->
+
+    <!-- @COMPONENT: About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">About Me</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+            </div>
+            
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <!-- Modern workspace with dual monitors and plants -->
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Coding workspace" class="rounded-xl shadow-lg w-full h-auto" />
+                </div>
+                <div>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6" data-mock="true">
+                        I'm a passionate full-stack developer with over 5 years of experience creating digital solutions that combine beautiful design with robust functionality. I specialize in modern web technologies and love turning complex problems into simple, elegant solutions.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-8" data-mock="true">
+                        When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community. I believe in continuous learning and staying up-to-date with the latest industry trends.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-6 bg-gray-50 rounded-xl">
+                            <div class="text-3xl font-bold text-primary-600 mb-2" data-mock="true">50+</div>
+                            <div class="text-sm text-gray-600 font-medium" data-mock="true">Projects Completed</div>
+                        </div>
+                        <div class="text-center p-6 bg-gray-50 rounded-xl">
+                            <div class="text-3xl font-bold text-primary-600 mb-2" data-mock="true">5+</div>
+                            <div class="text-sm text-gray-600 font-medium" data-mock="true">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: About Section -->
+
+    <!-- @COMPONENT: Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Skills & Technologies</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-mock="true">
+                    Here are the technologies and tools I work with to bring ideas to life.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Technical Skills -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-8">Technical Skills</h3>
+                    
+                    <!-- @MAP: technicalSkills.map(skill => ( -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-gray-800" data-mock="true">JavaScript / TypeScript</span>
+                            <span class="text-sm text-gray-600" data-mock="true">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-primary-600 h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-gray-800" data-mock="true">React / Next.js</span>
+                            <span class="text-sm text-gray-600" data-mock="true">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-primary-600 h-2 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-gray-800" data-mock="true">Node.js / Express</span>
+                            <span class="text-sm text-gray-600" data-mock="true">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-primary-600 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-gray-800" data-mock="true">Python / Django</span>
+                            <span class="text-sm text-gray-600" data-mock="true">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-primary-600 h-2 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-gray-800" data-mock="true">Database Design</span>
+                            <span class="text-sm text-gray-600" data-mock="true">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-primary-600 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+                
+                <!-- Tools & Technologies -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-8">Tools & Technologies</h3>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- @MAP: tools.map(tool => ( -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i class="fab fa-git-alt text-2xl text-orange-500"></i>
+                                <span class="font-medium text-gray-800" data-mock="true">Git</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i class="fab fa-docker text-2xl text-blue-500"></i>
+                                <span class="font-medium text-gray-800" data-mock="true">Docker</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i class="fab fa-aws text-2xl text-yellow-500"></i>
+                                <span class="font-medium text-gray-800" data-mock="true">AWS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-database text-2xl text-green-500"></i>
+                                <span class="font-medium text-gray-800" data-mock="true">MongoDB</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i class="fab fa-figma text-2xl text-purple-500"></i>
+                                <span class="font-medium text-gray-800" data-mock="true">Figma</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-mobile-alt text-2xl text-indigo-500"></i>
+                                <span class="font-medium text-gray-800" data-mock="true">React Native</span>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Skills Section -->
+
+    <!-- @COMPONENT: Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-mock="true">
+                    Here's a selection of projects that showcase my skills and expertise.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- @MAP: projects.map(project => ( -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-200">
+                    <!-- Modern e-commerce website interface showing products -->
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" alt="E-commerce Platform" class="w-full h-48 object-cover" data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2" data-mock="true">E-commerce Platform</h3>
+                        <p class="text-gray-600 mb-4" data-mock="true">
+                            Full-stack e-commerce solution built with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">React</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Node.js</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">MongoDB</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center text-primary-600 hover:text-primary-700 font-medium" data-event="click:openDemo">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="flex items-center text-gray-600 hover:text-gray-700 font-medium" data-event="click:openGithub">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-200">
+                    <!-- Task management dashboard with charts and lists -->
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" alt="Task Management App" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2" data-mock="true">Task Management App</h3>
+                        <p class="text-gray-600 mb-4" data-mock="true">
+                            Collaborative task management application with real-time updates, team collaboration features, and detailed analytics dashboard.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Next.js</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">TypeScript</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">Redis</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center text-primary-600 hover:text-primary-700 font-medium" data-event="click:openDemo">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="flex items-center text-gray-600 hover:text-gray-700 font-medium" data-event="click:openGithub">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-200">
+                    <!-- Social media mobile app interface on phone screen -->
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" alt="Social Media App" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2" data-mock="true">Social Media App</h3>
+                        <p class="text-gray-600 mb-4" data-mock="true">
+                            Cross-platform social media application built with React Native. Features include photo sharing, real-time messaging, and social interactions.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium">React Native</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">Firebase</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Expo</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center text-primary-600 hover:text-primary-700 font-medium" data-event="click:openDemo">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                            <a href="#" class="flex items-center text-gray-600 hover:text-gray-700 font-medium" data-event="click:openGithub">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center px-8 py-3 border-2 border-primary-600 text-primary-600 font-medium rounded-lg hover:bg-primary-600 hover:text-white transition-colors duration-200" data-event="click:viewAllProjects">
+                    <i class="fas fa-folder-open mr-2"></i>
+                    View All Projects
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Projects Section -->
+
+    <!-- @COMPONENT: Resume Section -->
+    <section id="resume" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Resume</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8" data-mock="true">
+                    Download my complete resume or view my experience and education below.
+                </p>
+                <a href="#" class="inline-flex items-center px-8 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors duration-200" data-event="click:downloadResume">
+                    <i class="fas fa-download mr-2"></i>
+                    Download Resume PDF
+                </a>
+            </div>
+            
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12">
+                <!-- Experience -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-8">Experience</h3>
+                    
+                    <!-- @MAP: experiences.map(exp => ( -->
+                    <div class="mb-8 pb-8 border-b border-gray-200 last:border-b-0">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-briefcase text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-semibold text-gray-900" data-mock="true">Senior Full Stack Developer</h4>
+                                <p class="text-primary-600 font-medium mb-2" data-mock="true">Tech Solutions Inc. | 2021 - Present</p>
+                                <p class="text-gray-600 leading-relaxed" data-mock="true">
+                                    Led development of multiple high-traffic web applications serving 100k+ users. Implemented microservices architecture and improved application performance by 40%. Mentored junior developers and established coding standards.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm">React</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-sm">Node.js</span>
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-sm">AWS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 pb-8 border-b border-gray-200 last:border-b-0">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-briefcase text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-semibold text-gray-900" data-mock="true">Full Stack Developer</h4>
+                                <p class="text-primary-600 font-medium mb-2" data-mock="true">Digital Agency Pro | 2019 - 2021</p>
+                                <p class="text-gray-600 leading-relaxed" data-mock="true">
+                                    Developed and maintained client websites and web applications. Collaborated with design teams to create pixel-perfect user interfaces. Integrated third-party APIs and payment systems.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-sm">Vue.js</span>
+                                    <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded text-sm">Python</span>
+                                    <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-sm">PostgreSQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+                
+                <!-- Education -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-8">Education</h3>
+                    
+                    <!-- @MAP: education.map(edu => ( -->
+                    <div class="mb-8 pb-8 border-b border-gray-200 last:border-b-0">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-graduation-cap text-indigo-600"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-semibold text-gray-900" data-mock="true">Mester of  Technology in Computer Science</h4>
+                                <p class="text-indigo-600 font-medium mb-2" data-mock="true"> Awadhesh pratap singh University of Technology | 2015 - 2019</p>
+                                <p class="text-gray-600 leading-relaxed" data-mock="true">
+                                    Graduated Magna Cum Laude with focus on software engineering and web development. Completed capstone project on distributed systems architecture.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">Certifications</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-certificate text-yellow-500"></i>
+                                <span class="text-gray-700" data-mock="true">AWS Certified Solutions Architect</span>
+                                <span class="text-sm text-gray-500" data-mock="true">(2023)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-certificate text-blue-500"></i>
+                                <span class="text-gray-700" data-mock="true">Google Cloud Professional Developer</span>
+                                <span class="text-sm text-gray-500" data-mock="true">(2022)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-certificate text-green-500"></i>
+                                <span class="text-gray-700" data-mock="true">MongoDB Certified Developer</span>
+                                <span class="text-sm text-gray-500" data-mock="true">(2022)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Resume Section -->
+
+    <!-- @COMPONENT: Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-mock="true">
+                    I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together!
+                </p>
+            </div>
+            
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12">
+                <!-- Contact Information -->
+                <div class="mb-12 lg:mb-0">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-envelope text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900">Email</p>
+                                <p class="text-gray-600" data-mock="true">john.doe@example.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-phone text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900">Phone</p>
+                                <p class="text-gray-600" data-mock="true">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900">Location</p>
+                                <p class="text-gray-600" data-mock="true">San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media Links -->
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-gray-900 mb-4">Follow Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600 hover:bg-primary-600 hover:text-white transition-colors duration-200" data-event="click:openLinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600 hover:bg-primary-600 hover:text-white transition-colors duration-200" data-event="click:openGithub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600 hover:bg-primary-600 hover:text-white transition-colors duration-200" data-event="click:openTwitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600 hover:bg-primary-600 hover:text-white transition-colors duration-200" data-event="click:openDribbble">
+                                <i class="fab fa-dribbble"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">Send Message</h3>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="first-name" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" id="first-name" name="first-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200" placeholder="Your first name" data-mock="true">
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" id="last-name" name="last-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200" placeholder="Your last name" data-mock="true">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200" placeholder="your.email@example.com" data-mock="true">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200" placeholder="What's this about?" data-mock="true">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 resize-none" placeholder="Tell me about your project..." data-mock="true"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary-600 text-white font-medium py-3 px-6 rounded-lg hover:bg-primary-700 transition-colors duration-200 flex items-center justify-center" data-event="click:submitForm">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Contact Section -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+                <div class="mb-8 lg:mb-0 lg:col-span-2">
+                    <h3 class="text-2xl font-bold mb-4" data-mock="true">John Doe</h3>
+                    <p class="text-gray-400 leading-relaxed max-w-md" data-mock="true">
+                        Full Stack Developer passionate about creating exceptional digital experiences. Always learning, always building.
+                    </p>
+                </div>
+                
+                <div class="mb-8 lg:mb-0">
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <nav class="space-y-2">
+                        <a href="#about" class="block text-gray-400 hover:text-white transition-colors duration-200">About</a>
+                        <a href="#skills" class="block text-gray-400 hover:text-white transition-colors duration-200">Skills</a>
+                        <a href="#projects" class="block text-gray-400 hover:text-white transition-colors duration-200">Projects</a>
+                        <a href="#contact" class="block text-gray-400 hover:text-white transition-colors duration-200">Contact</a>
+                    </nav>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200" data-event="click:openLinkedIn">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200" data-event="click:openGithub">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200" data-event="click:openTwitter">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200" data-event="click:openDribbble">
+                            <i class="fab fa-dribbble text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400" data-mock="true">
+                    © 2024 John Doe. All rights reserved. Built with ❤️ and lots of ☕
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        
+        (function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Form submission placeholder
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Form submission functionality would be implemented here.');
+                });
+            }
+            
+            // Smooth scroll for navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // Active navigation highlighting
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('nav a[href^="#"]');
+            
+            function highlightNavigation() {
+                let current = '';
+                const offset = 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - offset;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('text-primary-600');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('text-primary-600');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', highlightNavigation);
+            highlightNavigation(); // Initial call
+            
+        })();
+    </script>
+</body>
+</html>
